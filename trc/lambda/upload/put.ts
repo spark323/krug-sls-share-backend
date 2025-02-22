@@ -11,7 +11,7 @@ import ddbUtil from "../download/libs/aws/ddbUtil.js";
 
 export const apiSpec = {
 
-    category: "Sqs",
+    category: "upload",
     event: [
         {
             type: "REST",

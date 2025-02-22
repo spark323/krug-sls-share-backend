@@ -15,11 +15,11 @@ import { AwsCredentialIdentityProvider } from "@smithy/types";
 
 export const apiSpec = {
 
-	category: "Sqs",
+	category: "download",
 	event: [
 		{
 			type: "REST",
-			method: "Post",
+			method: "Get",
 		},
 	],
 	desc: "사용자의 요청에 따라 파일을 다운로드 합니다.",
