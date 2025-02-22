@@ -1,0 +1,44 @@
+#cf public key를 등록 후 해당 키를 KeyGroupID로 활용 필요
+AWSTemplateFormatVersion: '2010-09-09'
+Description: "Resource for awskrug-sls-share"
+Parameters:
+  ProjectName:
+    Type: String
+    Description: The name of the project being built.
+    Default: krug-sls-share
+  BuildStage:
+    Description: build stage
+    Type: String
+    Default: prod
+
+
+Resources:
+  #처음 업로드
+
+  InitialUploadBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub ${ProjectName}.${BuildStage}.${AWS::Region}-filebucket
+      LifecycleConfiguration:
+        Rules:
+          - Id: TransitionToIA
+            Status: Enabled
+            Transitions:
+              - TransitionInDays: 30
+                StorageClass: STANDARD_IA
+
+
+  ShareDataDB:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub ${ProjectName}-${BuildStage}-data
+      AttributeDefinitions:
+        - AttributeName: code
+          AttributeType: S
+
+      KeySchema:
+        - AttributeName: code
+          KeyType: HASH
+
+      BillingMode: PAY_PER_REQUEST
+      

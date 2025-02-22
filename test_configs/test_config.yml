@@ -1,0 +1,31 @@
+aws_profile: krugsls
+app: krug-sls-share
+region: ap-northeast-2
+useAWSSDKV3: true
+
+env:
+  stage: prod
+  service: krug-sls-share
+test_targets:
+  - uri: upload/put.js
+    eventType: http
+    description: template get
+    method: get
+    parms:
+      code: cert-331
+      bucket: krug-sls-share.prod.ap-northeast-2-filebucket
+      key: krugsls/2025-02-25/serverless.png
+      description: youtube
+    expect:
+      checkType: check_200
+
+  - uri: download/get.js
+    eventType: http
+    description: template get
+    method: get
+    parms:
+      code: cert-331
+   
+    expect:
+      checkType: check_200
+
