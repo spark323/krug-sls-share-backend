@@ -12,10 +12,10 @@ test_targets:
     description: template get
     method: get
     parms:
-      code: cert-331
+      code: sls-0225
       bucket: krug-sls-share.prod.ap-northeast-2-filebucket
-      key: krugsls/2025-02-25/serverless.png
-      description: youtube
+      key: krugsls/2025-02-25/AWS_KRUG서버리스소모임_발표자료_2025_02_25.zip
+      description: krug
     expect:
       checkType: check_200
 
@@ -24,8 +24,7 @@ test_targets:
     description: template get
     method: get
     parms:
-      code: cert-331
-   
+      code: sls-02-25
+
     expect:
       checkType: check_200
-
